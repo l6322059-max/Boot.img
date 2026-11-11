@@ -3,7 +3,7 @@
 Android app and desktop Python utility for extracting a standalone `boot.img` from a firmware ZIP.
 
 ## Android APK
-The Android app lets you select a firmware ZIP, finds a file named `boot.img` anywhere inside it, and saves that image using Android's document picker. It does not modify or flash a device.
+The Android app detects the phone's manufacturer and model, provides a one-tap web search for matching firmware, then lets you select the downloaded firmware ZIP. It finds a standalone `boot.img` anywhere inside the archive and saves it using Android's document picker. It does not modify or flash a device.
 
 ### Download the APK
 1. Open the repository's **Actions** tab.
@@ -15,6 +15,8 @@ The APK is built automatically whenever code is pushed to `main`, or manually wi
 
 ## Limitations
 - Extracts a standalone `boot.img` stored in the firmware ZIP.
+- Firmware discovery opens a web search; it does not silently download firmware or guarantee an official package exists for every model.
+- Check the exact model number and region, and use the phone maker's official support source whenever possible.
 - Does not yet unpack `payload.bin` (common in some firmware packages).
 - Does not read protected Android partitions directly from the phone.
 - Does not flash, patch, unlock, or write device partitions.
