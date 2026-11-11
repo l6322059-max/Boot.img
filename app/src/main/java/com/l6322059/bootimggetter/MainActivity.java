@@ -2,7 +2,9 @@ package com.l6322059.bootimggetter;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Build;
 import android.content.Intent;
+import android.net.Uri;
 import android.net.Uri;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -60,9 +62,39 @@ public class MainActivity extends Activity {
         title.setPadding(0, 12, 0, 4);
         root.addView(title);
 
-        TextView subtitle = text("Find and extract boot images from firmware ZIPs.", 15, 0xFFB8C2D1, false);
+        TextView subtitle = text("Detect your phone and find matching firmware ZIPs, then extract boot.img.", 15, 0xFFB8C2D1, false);
         subtitle.setPadding(0, 8, 0, 26);
         root.addView(subtitle);
+
+        String manufacturer = Build.MANUFACTURER == null ? "Android" : Build.MANUFACTURER;
+        String model = Build.MODEL == null ? "Unknown model" : Build.MODEL;
+        String deviceName = manufacturer + " " + model;
+        TextView deviceLabel = text("DETECTED DEVICE", 11, 0xFF94A3B8, true);
+        deviceLabel.setLetterSpacing(0.12f);
+        root.addView(deviceLabel);
+        TextView deviceInfo = text(deviceName + "\\nDevice code: " + Build.DEVICE, 16, Color.WHITE, true);
+        deviceInfo.setPadding(0, 8, 0, 12);
+        root.addView(deviceInfo);
+
+        Button findFirmware = new Button(this);
+        findFirmware.setText("FIND MATCHING FIRMWARE  ↗");
+        findFirmware.setAllCaps(false);
+        findFirmware.setTextSize(14);
+        findFirmware.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+        findFirmware.setTextColor(Color.WHITE);
+        findFirmware.setBackground(shape(0xFF273449, 16));
+        findFirmware.setPadding(10, 12, 10, 12);
+        root.addView(findFirmware, new LinearLayout.LayoutParams(-1, -2));
+        findFirmware.setOnClickListener(v -> {
+            String query = "official firmware download " + manufacturer + " " + model + " " + Build.DEVICE;
+            Intent search = new Intent(Intent.ACTION_VIEW,
+                Uri.parse("https://www.google.com/search?q=" + Uri.encode(query)));
+            startActivity(search);
+        });
+
+        TextView hint = text("Searches for firmware matching this exact device. Check model and region before downloading.", 12, 0xFF94A3B8, false);
+        hint.setPadding(0, 8, 0, 18);
+        root.addView(hint);
 
         LinearLayout accent = new LinearLayout(this);
         accent.setOrientation(LinearLayout.HORIZONTAL);
@@ -92,12 +124,12 @@ public class MainActivity extends Activity {
         cardTitle.setPadding(0, 10, 0, 6);
         card.addView(cardTitle);
 
-        TextView info = text("Choose a firmware ZIP. The app will look for a standalone boot.img and let you save it.", 14, 0xFFB8C2D1, false);
+        TextView info = text("After downloading firmware for your detected phone, select its ZIP. The app finds a standalone boot.img and lets you save it.", 14, 0xFFB8C2D1, false);
         info.setLineSpacing(5, 1f);
         card.addView(info);
 
         Button choose = new Button(this);
-        choose.setText("SELECT FIRMWARE ZIP  →");
+        choose.setText("SELECT DOWNLOADED FIRMWARE ZIP  →");
         choose.setAllCaps(false);
         choose.setTextSize(15);
         choose.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
