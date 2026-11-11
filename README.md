@@ -1,44 +1,26 @@
 # Boot.img Getter
 
-A read-only boot image extractor with two input modes:
+Android app and desktop Python utility for extracting a standalone `boot.img` from a firmware ZIP.
 
-- **Firmware ZIP:** finds and extracts a standalone boot.img from a firmware ZIP.
-- **Android phone (ADB):** reads a boot partition from your own connected, already-rooted Android phone.
+## Android APK
+The Android app lets you select a firmware ZIP, finds a file named `boot.img` anywhere inside it, and saves that image using Android's document picker. It does not modify or flash a device.
 
-This tool never flashes, patches, unlocks, or writes to device partitions. Phone mode requires USB debugging, an authorized ADB connection, and existing root permission (su). Use only a partition path confirmed for your exact device.
+### Download the APK
+1. Open the repository's **Actions** tab.
+2. Open the latest successful **Build Android APK** run.
+3. Under **Artifacts**, download **BootImgGetter-debug**.
+4. Extract the ZIP artifact and install `app-debug.apk` on your Android phone. You may need to allow installation from your browser/file manager.
 
-## Requirements
-- Python 3.10+
-- Android Platform Tools (adb) for phone mode
-- Existing root access on the phone for protected partition reads
+The APK is built automatically whenever code is pushed to `main`, or manually with **Actions → Build Android APK → Run workflow**.
 
-## Run
-```bash
-python -m venv .venv
-# Windows: .venv\\Scripts\\activate
-# macOS/Linux: source .venv/bin/activate
-pip install -r requirements.txt
-python boot_img_getter.py
-```
+## Limitations
+- Extracts a standalone `boot.img` stored in the firmware ZIP.
+- Does not yet unpack `payload.bin` (common in some firmware packages).
+- Does not read protected Android partitions directly from the phone.
+- Does not flash, patch, unlock, or write device partitions.
 
-## Firmware ZIP
-Choose Firmware ZIP, select your firmware archive, and choose an output folder. The app extracts an existing file named boot.img. If the package contains only payload.bin, this version reports that it cannot extract it yet.
-
-## Android phone
-1. Enable USB debugging on your own phone and connect it to your computer.
-2. Accept the USB debugging authorization prompt.
-3. Install Android Platform Tools and ensure adb is on PATH.
-4. Select Android phone (ADB) and press Check device.
-5. Enter the exact boot partition path confirmed for your device. Do not guess.
-6. Press Read boot partition and approve the confirmation prompt.
-
-If root access is unavailable, the app stops. It does not bypass Android security.
-
-## Important
-- Reads only; no flashing or partition writes.
-- A/B devices may use slot-specific names such as boot_a and boot_b; verify the correct path from trusted device documentation.
-- This is a desktop Python utility, not an Android APK. Android apps cannot directly read protected partitions without appropriate device privileges.
-- Keep boot images private if they contain device-specific information.
+## Desktop version
+The original `boot_img_getter.py` remains available for desktop use. Phone/ADB mode requires an authorized connection and existing root access.
 
 ## License
 MIT
