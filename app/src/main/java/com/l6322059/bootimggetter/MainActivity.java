@@ -51,7 +51,7 @@ public class MainActivity extends Activity {
         root.setPadding(24, 34, 24, 24);
         root.setBackgroundColor(Color.rgb(8, 9, 13));
 
-        TextView eyebrow = text("UTILITY  /  ANDROID", 11, 0xFF25F4EE, true);
+        TextView eyebrow = text("UTILITY  /  ANDROID", 11, 0xFF3B82F6, true);
         eyebrow.setLetterSpacing(0.16f);
         root.addView(eyebrow);
 
@@ -60,17 +60,17 @@ public class MainActivity extends Activity {
         title.setPadding(0, 12, 0, 4);
         root.addView(title);
 
-        TextView subtitle = text("Find and extract boot images from firmware ZIPs.", 15, 0xFFADB4C2, false);
+        TextView subtitle = text("Find and extract boot images from firmware ZIPs.", 15, 0xFFB8C2D1, false);
         subtitle.setPadding(0, 8, 0, 26);
         root.addView(subtitle);
 
         LinearLayout accent = new LinearLayout(this);
         accent.setOrientation(LinearLayout.HORIZONTAL);
         View cyan = new View(this);
-        cyan.setBackground(shape(0xFF25F4EE, 8));
+        cyan.setBackground(shape(0xFF3B82F6, 8));
         accent.addView(cyan, new LinearLayout.LayoutParams(0, 4, 1));
         View pink = new View(this);
-        pink.setBackground(shape(0xFFFE2C55, 8));
+        pink.setBackground(shape(0xFF94A3B8, 8));
         LinearLayout.LayoutParams pinkParams = new LinearLayout.LayoutParams(0, 4, 1);
         pinkParams.leftMargin = 8;
         accent.addView(pink, pinkParams);
@@ -84,7 +84,7 @@ public class MainActivity extends Activity {
         cardParams.topMargin = 28;
         root.addView(card, cardParams);
 
-        TextView label = text("FIRMWARE EXTRACTOR", 12, 0xFF25F4EE, true);
+        TextView label = text("FIRMWARE EXTRACTOR", 12, 0xFF3B82F6, true);
         label.setLetterSpacing(0.12f);
         card.addView(label);
 
@@ -92,7 +92,7 @@ public class MainActivity extends Activity {
         cardTitle.setPadding(0, 10, 0, 6);
         card.addView(cardTitle);
 
-        TextView info = text("Choose a firmware ZIP. The app will look for a standalone boot.img and let you save it.", 14, 0xFFADB4C2, false);
+        TextView info = text("Choose a firmware ZIP. The app will look for a standalone boot.img and let you save it.", 14, 0xFFB8C2D1, false);
         info.setLineSpacing(5, 1f);
         card.addView(info);
 
@@ -102,7 +102,7 @@ public class MainActivity extends Activity {
         choose.setTextSize(15);
         choose.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
         choose.setTextColor(0xFF08090D);
-        choose.setBackground(shape(0xFF25F4EE, 18));
+        choose.setBackground(shape(0xFF3B82F6, 18));
         choose.setPadding(12, 16, 12, 16);
         LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(-1, -2);
         buttonParams.topMargin = 22;
@@ -122,7 +122,7 @@ public class MainActivity extends Activity {
         statusParams.topMargin = 18;
         root.addView(statusCard, statusParams);
 
-        TextView statusLabel = text("STATUS", 11, 0xFFFE2C55, true);
+        TextView statusLabel = text("STATUS", 11, 0xFF94A3B8, true);
         statusLabel.setLetterSpacing(0.14f);
         statusCard.addView(statusLabel);
 
@@ -131,7 +131,7 @@ public class MainActivity extends Activity {
         status.setLineSpacing(4, 1f);
         statusCard.addView(status);
 
-        TextView footer = text("SAFE MODE  •  READ-ONLY EXTRACTION", 10, 0xFF737D8E, true);
+        TextView footer = text("SAFE MODE  •  READ-ONLY EXTRACTION", 10, 0xFF7F8DA3, true);
         footer.setGravity(Gravity.CENTER);
         footer.setLetterSpacing(0.08f);
         LinearLayout.LayoutParams footerParams = new LinearLayout.LayoutParams(-1, -2);
